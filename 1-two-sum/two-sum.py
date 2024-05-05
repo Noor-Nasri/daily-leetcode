@@ -3,9 +3,9 @@ class Solution:
         seen = {}
 
         for ind in range(len(nums)):
-            wanted = target - nums[ind]
-            if wanted in seen:
-                return [seen[wanted], ind]
-            
-            seen[nums[ind]] = ind
+            value = nums[ind]
+            wanted = target - value
+
+            if wanted in seen: return [seen[wanted], ind]
+            seen[value] = ind
         
