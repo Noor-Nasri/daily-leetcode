@@ -1,7 +1,7 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         n = len(height)
-        tallest_from_right = {}
+        tallest_from_right = [None for _ in range(n)]
         tallest_R = -1
 
         for ind in range(n - 1, -1, -1):
