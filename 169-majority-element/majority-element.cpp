@@ -1,20 +1,27 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        unordered_map<int, int> occurances;
+        // for O(1) memory, we just abuse that it appears > n/2 times
+        // Count occurance of just one element, switch as it proves impossible
 
-        for (int num : nums){
-            if (occurances.find(num) == occurances.end()){
-                occurances[num] = 1;
+        int occurances = 1;
+        int major_value = nums[0];
+
+        for (int i = 1; i < nums.size(); i++){
+            int new_value = nums[i];
+
+            if (new_value == major_value){
+                occurances++;
             }else{
-                occurances[num]++;
-            }
+                occurances--;
 
-            if (occurances[num] > nums.size()/2){
-                return num;
+                if (!occurances){
+                    occurances = 1;
+                    major_value = new_value;
+                }
             }
         }
 
-        return -1;
+        return major_value;
     }
 };
