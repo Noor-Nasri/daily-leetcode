@@ -2,10 +2,11 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        set<tuple<int, int, int>> solutions;
-
+        set<tuple<int, int, int>> found;
+        vector<vector<int>> results;
+    
         // Old python solution simplified to 2-sum n times
-        // Was somehow too slow, looking into hint "2 pointer" instead of 2-sum
+        // Was somehow too slow, looking into hint "2 pointer" instead of hash
         for (int i = 0; i < nums.size() - 2; i++){
             // Idea: fix num1 to be at i
             // Need to get other 2 = -num1. Start at smallest + biggest
@@ -20,8 +21,12 @@ public:
 
                 if (total == target){
                     // add solution
-                    tuple<int, int, int> sol = make_tuple(nums[i], nums[small], nums[big]);
-                    solutions.insert(sol);
+                    tuple<int, int, int> seen = make_tuple(nums[i], nums[small], nums[big]);
+                    if (!found.count(seen)){
+                        found.insert(seen);
+                        vector<int> sol = {nums[i], nums[small], nums[big]}; 
+                        results.push_back(sol);
+                    }
                     small++;
                     big--;
 
@@ -34,14 +39,6 @@ public:
             }
         }
 
-        vector<vector<int>> results;
-        for (tuple<int, int, int> tup : solutions){
-            vector<int> solution;
-            solution.push_back(get<0>(tup));
-            solution.push_back(get<1>(tup));
-            solution.push_back(get<2>(tup));
-            results.push_back(solution);
-        }
         return results;
     }
 };
