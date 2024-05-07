@@ -7,7 +7,7 @@ public:
         for (char c : magazine) magazine_counts[c]++;
 
         for (char c : ransomNote){
-            if (magazine_counts[c] == 0) return false;
+            if (!magazine_counts[c]) return false;
 
             magazine_counts[c]--;
         }
