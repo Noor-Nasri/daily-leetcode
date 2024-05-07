@@ -16,8 +16,6 @@ class Solution:
                 else:
                     m = (p2[1] - p1[1])/(p2[0] - p1[0])
                 
-                if i1 == 0: print(m)
-
                 if m in lines:
                     lines[m] += 1
 
