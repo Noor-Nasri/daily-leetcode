@@ -3,8 +3,9 @@ class Solution:
 
         total = 0
         for i in range(32, -1, -1):
-            if (n // (2**i)):
-                n -= 2**i
+            val = 2**i
+            if (n // val):
+                n -= val
                 total += 2**(32 - i - 1)
         
         return total
