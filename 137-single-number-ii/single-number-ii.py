@@ -15,8 +15,9 @@ class Solution:
                 is_1 = (num >> i) & 1
                 num_1s += is_1
 
-            if num_1s % 3:
-                total += 2**i
+            # Can also just total += 2**(..)
+            power_2 = (num_1s % 3) << i
+            total |= power_2
 
         if total >= 2**31: total -= 2**32
         return total
