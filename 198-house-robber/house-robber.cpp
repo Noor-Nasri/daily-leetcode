@@ -1,14 +1,14 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        vector<int> money(nums.size() + 1);
-        money[1] = nums[0];
-
+        int best_prev_prev = 0;
+        int best_prev = nums[0];
         for (int i = 1; i < nums.size(); i++){
-            int option = nums[i] + money[i-1];
-            money[i + 1] = max(option, money[i]);
+            int best = max(nums[i] + best_prev_prev, best_prev);
+            best_prev_prev = best_prev;
+            best_prev = best;
         }
 
-        return money[nums.size()];
+        return best_prev;
     }
 };
