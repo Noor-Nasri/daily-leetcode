@@ -14,7 +14,7 @@ public:
 
         // backward pass
         prod = 1;
-        for (int i = nums.size() - 1; i >= 0; i--){
+        for (int i = nums.size() - 1; i > -1; i--){
             solution[i] *= prod;
             prod *= nums[i];
         }
