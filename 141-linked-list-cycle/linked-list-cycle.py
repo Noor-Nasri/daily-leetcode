@@ -5,13 +5,11 @@
 #         self.next = None
 
 class Solution:
-    MAXVAL = 10**5 + 1
-
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         if (head == None): return False
-        if (head.val == self.MAXVAL): return True
+        if (head.val == "a"): return True
 
-        head.val = self.MAXVAL
+        head.val = "a"
         return self.hasCycle(head.next)
 
 
