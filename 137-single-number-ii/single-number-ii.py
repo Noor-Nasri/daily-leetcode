@@ -9,6 +9,9 @@ class Solution:
         for i in range(32):
             num_1s = 0
             for num in nums:
+                if num < 0:
+                    num = num & (2**32-1)
+                    
                 # num >> i shifts the binary i times to the RIGHT
                 # that means, the wanted one will be at the last position
                 # ie least significant. So then we AND with 1 to just get the last
