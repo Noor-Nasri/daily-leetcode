@@ -34,9 +34,7 @@ public:
             Node* next_node = remaining.top();
             remaining.pop();
 
-            if (cloneMappings.count(next_node)){
-                continue;
-            }
+            if (cloneMappings.count(next_node)) continue;
             Node* newNode = new Node(next_node->val);
             //cout << "Created copy for " << next_node->val << " \n";
 
