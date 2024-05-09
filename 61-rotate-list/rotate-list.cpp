@@ -10,7 +10,9 @@
  */
 class Solution {
 public:
-    ListNode* flipHelper(ListNode* head){
+    tuple<ListNode*, ListNode*, int>  flipHelper(ListNode* head){
+        ListNode* oldHead = head; // becomes tail
+        int numElements = 1;
         ListNode* prev = head;
         ListNode* cur = head->next;
         head->next = NULL;
@@ -20,9 +22,10 @@ public:
             cur->next = prev;
             prev = cur;
             cur = temp;
+            numElements++;
         }
 
-        return prev;
+        return make_tuple(prev, oldHead, numElements);
     }
 
     ListNode* shiftLeft(ListNode* head, ListNode* tail, int numShifts){
@@ -43,18 +46,9 @@ public:
         if (head == NULL) return head;
 
         // Flip it, shift left, then flip back
-        head = flipHelper(head);
-
-        int numElements = 1;
-        ListNode* tail = head;
-        while (tail->next != NULL){
-            tail = tail->next;
-            numElements++;
-        }
-        int numShifts = k % numElements;
-
-        head = shiftLeft(head, tail, numShifts);
-        head = flipHelper(head);
+        tuple<ListNode*, ListNode*, int> data = flipHelper(head);
+        head = shiftLeft(get<0>(data), get<1>(data), k % get<2>(data));
+        head = get<0>(flipHelper(head));
     
         return head;
     }
