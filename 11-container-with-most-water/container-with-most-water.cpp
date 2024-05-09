@@ -10,14 +10,16 @@ public:
         int bestArea = 0;
 
         while (left < right){
-            int area = min(height[left], height[right]) * (right - left);
-            if (area > bestArea) bestArea = area;
-
+            int area = 0;
             if (height[left] <= height[right]){
+                area = height[left] * (right - left);
                 left++;
             }else{
+                area = height[right] * (right - left);
                 right--;
             }
+
+            if (area > bestArea) bestArea = area;
         }
 
         return bestArea;
