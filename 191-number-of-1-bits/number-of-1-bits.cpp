@@ -18,7 +18,7 @@ public:
         // Turned out super easy, just check is LSB is 1 then shift
         int numOnes = 0;
         while (n){
-            numOnes += (n & 1);
+            if (n & 1) numOnes++;
             n >>= 1;
         }
         return numOnes;
