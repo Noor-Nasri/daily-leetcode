@@ -8,9 +8,7 @@ class Solution:
                 if t[i] in seen: return False
                 mappings[s[i]] = t[i]
                 seen.add(t[i])
-                continue
-            
-            if mappings[s[i]] != t[i]:
+            elif mappings[s[i]] != t[i]:
                 return False
 
         return True
