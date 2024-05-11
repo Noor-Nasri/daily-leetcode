@@ -1,21 +1,28 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        int numJumps[nums.size()];
-        numJumps[nums.size() - 1] = 0; 
+        if (nums.size() == 1) return 0;
+        // Admittedly, my first approach was a simple DP solution.
+        // It was accepted at about 60ms, but I saw from the discussion
+        // a much better intuition
 
-        for (int i = nums.size() - 2 ; i > -1 ; i--){
-            int best_jump_val = 100000;
-            int max_jump_ind = i + nums[i];
-            if (nums.size() <= max_jump_ind) max_jump_ind = nums.size() - 1;
+        // Idea: At each point, store the furthest you could have reached,
+        // in the same number of steps as from this one.
 
-            for (int j = i + 1; j <= max_jump_ind; j++){
-                if (numJumps[j] < best_jump_val) best_jump_val = numJumps[j];
+        int nextTarget = nums[0];
+        int i = 1;
+        int curSteps = 1;
+
+        while (nextTarget < nums.size() - 1){
+            int maxReach = max(nums[i] + i, nums[i-1]);
+            nums[i] = maxReach;
+            if (i == nextTarget){
+                nextTarget = maxReach;
+                curSteps++;
             }
-
-            numJumps[i] = best_jump_val + 1;
+            i++;
         }
 
-        return numJumps[0];
+        return curSteps;
     }
 };
