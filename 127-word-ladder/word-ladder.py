@@ -4,6 +4,7 @@ class Solution:
         if not endWord in possible:
             return 0
     
+        chars = [chr(c) for c in range(97, 97+26)]
         seen = set()
         seen.add(beginWord)
         cur = [beginWord]
@@ -17,9 +18,9 @@ class Solution:
                 if word == endWord: return steps
 
                 for i in range(numChars):
-                    for c in range(26):
-                        newWord = word[:i] + chr(97 + c) + word[i+1:]
-                        if newWord in possible and not newWord in seen:
+                    for c in chars:
+                        newWord = word[:i] + c + word[i+1:]
+                        if not newWord in seen and newWord in possible:
                             seen.add(newWord)
                             nextIter.append(newWord)
             
