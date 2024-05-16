@@ -5,27 +5,21 @@ public:
     }
 
     int findMaximizedCapital(int k, int w, vector<int>& profits, vector<int>& capital) {
-        // Loop: Maximize capital as much as possible 
-        // Logic: Of ALL CAP < cur budget: Take max profit, repeat
+        // Idea: Go through (sorted) cap until we cant, add profits to MaxHeap
+        // When we can't reach the next cap, or all done, start POPing till done. 
+        // If we are at k or cant do any more projects, return profits
 
-        // Have two sorted arrays <-> cap and profit
-        // Go through cap until we cant, every time add profit to MaxHeap
-        // When we can't reach the remaining cap (or all unlocked), POP. 
-        // If we are at k, return cur profit
-
+        // first sort while storing indices
         vector<pair<int, int>> newCapitals;
         for (int i = 0; i < capital.size(); i++){
             newCapitals.push_back(make_pair(capital[i], i));
         }
-
-        
-
         sort(newCapitals.begin(), newCapitals.end(), comparator); 
         
+        // now iter
         priority_queue<int> best_profits;
         int totalProfit = w;
         int used = 0;
-
         for (int i = 0 ; i < newCapitals.size(); i++){
             int capRequired = newCapitals[i].first;
 
