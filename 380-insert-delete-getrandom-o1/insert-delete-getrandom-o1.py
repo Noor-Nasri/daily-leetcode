@@ -33,8 +33,7 @@ class RandomizedSet:
         
 
     def getRandom(self) -> int:
-        ind = random.randint(0, len(self.data_list)-1)
-        return self.data_list[ind]
+        return random.choice(self.data_list)
         
 
 
