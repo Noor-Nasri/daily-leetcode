@@ -1,25 +1,34 @@
 class RandomizedSet:
 
     def __init__(self):
-        self.data_set = set()
-        self.data_list = list()
+        self.ind_pointers = {}
+        self.data_list = []
 
     def insert(self, val: int) -> bool:
-        if val in self.data_set:
+        if val in self.ind_pointers:
             return False
         
-        self.data_set.add(val)
+        self.ind_pointers[val] = len(self.data_list)
         self.data_list.append(val)
         return True
         
 
     def remove(self, val: int) -> bool:
-        if not (val in self.data_set):
+        if not (val in self.ind_pointers):
             return False
         
+        ind_target = self.ind_pointers[val]
+        ind_last = len(self.data_list) - 1
 
-        self.data_set.remove(val)
-        self.data_list.remove(val)
+        if (ind_target == ind_last):
+            self.data_list.pop()
+        else:
+            val_last = self.data_list[-1]
+            self.data_list[ind_target] = val_last
+            self.ind_pointers[val_last] = ind_target
+            self.data_list.pop()
+        
+        del self.ind_pointers[val]
         return True
         
 
