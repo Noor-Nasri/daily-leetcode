@@ -22,28 +22,13 @@ class WordDictionary:
     def addWord(self, word: str) -> None:
         self.recurLetter(word, 0, self.initDict)
 
-    def getMatches(self, word: str, curInd: int, curDict):
-        char = word[curInd]
-        matches = []
-        if char == ".":
-            for key in curDict:
-                if key == "FINAL": continue
-                matches.append(curDict[key])
-        else:
-            if char in curDict:
-                matches.append(curDict[char])
-            if "." in curDict:
-                matches.append(curDict["."])
-        
-        return matches
-
     
     def search(self, word: str) -> bool:
         #print("SEARCHING FOR:", word)
-        matches = self.getMatches(word, 0, self.initDict)
-        curInd = 0
+        matches = [self.initDict]
+        curInd = -1
 
-        while matches:
+        while True:
             #print(curInd, matches)
 
             curInd += 1
@@ -53,11 +38,23 @@ class WordDictionary:
                     if 'FINAL' in match: return True
                 return False
             
+            char = word[curInd]
             nextMatches = []
             for curDict in matches:
-                nextMatches += self.getMatches(word, curInd, curDict)
-
+                if char == ".":
+                    for key in curDict:
+                        if key == "FINAL": continue
+                        nextMatches.append(curDict[key])
+                else:
+                    if char in curDict:
+                        nextMatches.append(curDict[char])
+                    if "." in curDict:
+                        nextMatches.append(curDict["."])
+        
             matches = nextMatches
+
+            if not matches:
+                break
         return False
         
 
