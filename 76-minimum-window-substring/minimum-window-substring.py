@@ -22,7 +22,6 @@ class Solution:
             if val > 0: missing[ind] = val
 
 
-        print("Initial target:", word_counts)
         included = deque()
         self.best = None
 
@@ -30,7 +29,6 @@ class Solution:
             while True:
                 top_ind = self.get_ind(s[included[0]])
                 if word_counts[top_ind] < 0:
-                    print("Excluding top")
                     # Can shift left side of window up
                     included.popleft()
                     word_counts[top_ind] += 1
@@ -38,7 +36,6 @@ class Solution:
                     # Check if this is best so far
                     cur = (included[0], included[-1] + 1)
                     if (self.best == None) or (cur[1] - cur[0]) < (self.best[1] - self.best[0]):
-                        print("New best", cur)
                         self.best = cur
                 else:
                     break
@@ -60,13 +57,11 @@ class Solution:
                     del missing[count_ind]
                     if not missing: # No more missing, found first solution
                         self.best = (included[0], i+1)
-                        print("First sol", self.best)
                         filterExtras()
 
             else:
                 # We are trying to optimize this window. 
                 # Include it, and if we can start popping the front then do it
-                print("Iterating over", i)
                 word_counts[count_ind] -= 1
                 included.append(i)
                 filterExtras()
@@ -74,7 +69,6 @@ class Solution:
         if self.best == None:
             return ""
 
-        print("Final verification", word_counts)
         filterExtras()
         return s[self.best[0]:self.best[1]]
         
