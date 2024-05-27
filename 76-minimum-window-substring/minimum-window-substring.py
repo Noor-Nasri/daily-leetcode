@@ -13,6 +13,8 @@ class Solution:
         # If full match, store it as best if best
         # Once we include too many, we can exclude the earliest
         # At every point, we store EARLIEST, and LATEST. 
+        # In hindsight, a queue was overkill. Just use two pointer and cpp ..
+        
         word_counts = [0 for i in range(26*2)]
         for char in t:
             word_counts[self.get_ind(char)] += 1
