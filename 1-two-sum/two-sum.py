@@ -4,7 +4,6 @@ class Solution:
 
         for ind, value in enumerate(nums):
             wanted = target - value
-
             if wanted in seen: 
                 return [seen[wanted], ind]
             seen[value] = ind
