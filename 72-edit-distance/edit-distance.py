@@ -10,14 +10,15 @@ class Solution:
             return len(word1) - ind1
 
         # Replace or match the char
-        option_match = self.helper(word1, word2, ind1 + 1, ind2 + 1)
-        if word1[ind1] != word2[ind2]: option_match += 1
+        if word1[ind1] == word2[ind2]:
+            best = self.helper(word1, word2, ind1 + 1, ind2 + 1)
 
-        # Delete cur or insert required char
-        option_delete = 1 + self.helper(word1, word2, ind1 + 1, ind2)
-        option_insert = 1 + self.helper(word1, word2, ind1, ind2 + 1)
+        else:
+            option_replace = self.helper(word1, word2, ind1 + 1, ind2 + 1)
+            option_delete = self.helper(word1, word2, ind1 + 1, ind2)
+            option_insert = self.helper(word1, word2, ind1, ind2 + 1)
+            best = 1 + min(option_replace, option_delete, option_insert)
 
-        best = min(option_match, option_delete, option_insert)
         self.sols[(ind1, ind2)] = best
         return best
 
