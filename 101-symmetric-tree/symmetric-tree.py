@@ -7,32 +7,22 @@
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         nodes = [root]
-        while True:
-            # Check still equal
-            allNull = True
-            for i in range(len(nodes)//2+1):
+        while nodes:
+            nextIter = []
+            for i in range(len(nodes)):
                 first = nodes[i]
                 second = nodes[len(nodes) - 1 - i]
                 
                 # Symmetrically have no children
                 if first == None and second == None: continue
-                
-                allNull = False
                 if first == None or second == None: return False
                 if first.val != second.val: return False
+                
+                # append next round
+                if first:
+                    nextIter.append(first.left)
+                    nextIter.append(first.right)
 
-            if allNull: return True
-
-            # Next round BFS
-            nextIter = []
-            for node in nodes:
-                if node == None:
-                    nextIter.append(None)
-                    nextIter.append(None)
-                else:
-                    nextIter.append(node.left)
-                    nextIter.append(node.right)
-            
             nodes = nextIter
 
 
