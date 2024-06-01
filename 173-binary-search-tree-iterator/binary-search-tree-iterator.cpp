@@ -23,8 +23,6 @@ public:
 
     BSTIterator(TreeNode* root) {
         int test = (-1 < 0);
-        cout << test << '\n';
-
         this->nodes = {};
         InOrderFill(root);
         this->curPointer = -1;
