@@ -24,9 +24,9 @@ public:
 
         // Either left tree is full (largest in row continues to left)
         // Or right tree is full (full row, largest ended in next row on left)
-        
-        int counted = 1;
-        for (int j = 0; j < depth_R; j++) counted += pow(2, j);
+        // Counting each level gives us: 1 + 2 + 4 ... + 2^(depth_R - 1)
+        // = 2^depth_R - 1. Since we also need to include this node, it is 2^depth_R
+        int counted = pow(2, depth_R);
 
         if (depth_L == depth_R){
             // 1 + count(depth_L == depth_R) + rest
