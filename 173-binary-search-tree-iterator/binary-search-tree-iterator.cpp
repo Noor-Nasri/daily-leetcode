@@ -18,7 +18,6 @@ public:
         if (root == NULL) return;
         InOrderFill(root->left);
         this->nodes.push_back(root);
-        cout << "Added " << root->val << " to nodes \n";
         InOrderFill(root->right);
     }
 
@@ -38,15 +37,8 @@ public:
     }
     
     bool hasNext() {
-        if (curPointer == -1 && nodes.size()) return true;
-        cout << curPointer << '\n';
-        cout << "While we have " << nodes.size() << " elements\n";
-        if (curPointer < (nodes.size() - 1)){
-            return true;
-        }
-
-        cout << "Not enough room";
-        return false;
+        if (curPointer == -1 && nodes.size()) return true; // I have NO idea why this was bugging. It should be fine ..
+        return curPointer < (nodes.size() - 1);
     }
 };
 
