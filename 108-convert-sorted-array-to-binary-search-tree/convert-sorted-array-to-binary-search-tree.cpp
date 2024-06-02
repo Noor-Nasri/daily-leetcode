@@ -16,9 +16,7 @@ public:
         int m = (s + e)/2;
         TreeNode* left = createBSTinCutoff(nums, s, m-1);
         TreeNode* right = createBSTinCutoff(nums, m+1, e);
-
-        TreeNode* head = new TreeNode(nums[m], left, right);
-        return head;
+        return new TreeNode(nums[m], left, right);;
     }
 
     TreeNode* sortedArrayToBST(vector<int>& nums) {
