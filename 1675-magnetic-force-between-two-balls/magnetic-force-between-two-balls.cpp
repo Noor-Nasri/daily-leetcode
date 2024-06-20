@@ -30,13 +30,13 @@ public:
             int mid = (low + high + 1)/2;
 
             if (canSolve(position, m, mid)){
-                if (low == high){
+                if (mid == high){
                     return mid;
                 }
 
-                low = mid;
+                low = mid; // try to go higher
             }else{
-                high = mid - 1;
+                high = mid - 1; // mid couldnt work so all > impossible
             }
         }
 
