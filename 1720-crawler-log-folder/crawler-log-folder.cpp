@@ -1,19 +1,18 @@
 class Solution {
 public:
     int minOperations(vector<string>& logs) {
-        stack<string> files = {};
+        int depth = 0;
 
         for (string s : logs){
             if (s == "./") continue;
             if (s == "../"){
-                if (!files.empty()){
-                    files.pop();
-                }
+                depth--;
+                if (depth < 0) depth = 0;
             }else{
-                files.push(s);
+                depth++;
             }
         }
         
-        return files.size();
+        return depth;
     }
 };
