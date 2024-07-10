@@ -5,11 +5,10 @@ public:
 
         for (string s : logs){
             if (s == "./") continue;
-            if (s == "../"){
-                depth--;
-                if (depth < 0) depth = 0;
-            }else{
+            if (s != "../"){
                 depth++;
+            }else if (depth > 0){
+                depth--;
             }
         }
         
