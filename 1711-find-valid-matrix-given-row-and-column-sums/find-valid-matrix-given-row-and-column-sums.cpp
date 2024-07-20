@@ -8,8 +8,12 @@ public:
             for (int col = 0; col < colSum.size(); col++){
                 int maxAllowed = min(rowSum[row], colSum[col]);
                 nextRow.push_back(maxAllowed);
-                rowSum[row] -= maxAllowed;
-                colSum[col]-= maxAllowed;
+
+                if (maxAllowed){
+                    rowSum[row] -= maxAllowed;
+                    colSum[col]-= maxAllowed;
+                }
+                
             }
 
             result.push_back(nextRow);
