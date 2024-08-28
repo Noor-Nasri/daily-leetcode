@@ -43,14 +43,15 @@ class Solution:
 
 
     def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
-        self.islands1 = self.solveIslands(grid1)
+        #self.islands1 = self.solveIslands(grid1)
+        self.islands1 = grid1 # Turns out, no need to solve islands for grid1. Land is enough
         self.islands2 = self.solveIslands(grid2)
 
         checked = set()
         total = 0
         for row in range(len(grid2)):
             for col in range(len(grid2[row])):
-                if (self.islands2[row][col] > 0 )and not (self.islands2[row][col] in checked):
+                if (self.islands2[row][col] > 0) and not (self.islands2[row][col] in checked):
                     expected2 = self.islands2[row][col]
                     checked.add(expected2)
 
