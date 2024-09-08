@@ -6,8 +6,7 @@
 class Solution:
     def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
         length = 0
-        cur = head
-
+        cur = head 
         while (cur != None):
             length += 1
             cur = cur.next
