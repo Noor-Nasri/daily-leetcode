@@ -47,9 +47,9 @@ class Solution:
                 newLength = 0
 
 
-        while len(newItems) < k:
-            newItems.append(None)
-        
+        if len(newItems) < k:
+            newItems.extend([None] * ( (k - len(newItems))))
+
         return newItems
 
 
