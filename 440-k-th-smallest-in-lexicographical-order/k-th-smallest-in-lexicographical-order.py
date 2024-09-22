@@ -14,7 +14,6 @@ class Solution:
         return count
 
     def recurSolve(self, curVal, indexWanted):
-        print("Instructed to solve with", curVal, indexWanted)
         if indexWanted == 0: 
             return curVal
         
@@ -29,7 +28,6 @@ class Solution:
             if nextVal > self.max: continue
 
             count = 1 + self.getCountOfPrefix(nextVal)
-            print("Looking at prefix", nextVal, "has", count)
             if indexWanted < seenSoFar + count:
                 return self.recurSolve(nextVal, indexWanted - seenSoFar)
             
