@@ -6,22 +6,29 @@ public:
 
     CustomStack(int maxSize) {
         this->maxSize = maxSize;
-        for (int i = 0; i < 1001; i++) increments[i] = 0;
+        // for (int i = 0; i < 1001; i++) increments[i] = 0;
     }
     
     void push(int x) {
-        if (baseVals.size() < maxSize){
-            baseVals.push(x);
-        }
+        if (baseVals.size() < maxSize) baseVals.push(x);
     }
     
     int pop() {
         if (baseVals.empty()) return -1;
-        int bonus = increments[baseVals.size()];
-        if (baseVals.size() > 0){
-            increments[baseVals.size() - 1] += increments[baseVals.size()];
+        int bonus = 0;
+        if (increments.find(baseVals.size()) != increments.end()){
+            bonus = increments[baseVals.size()];
+            // now shift bonus to older elements
+
+            if (increments.find(baseVals.size() - 1) != increments.end()){
+                increments[baseVals.size() - 1] += increments[baseVals.size()];
+            }else{
+                increments[baseVals.size() - 1] = increments[baseVals.size()];
+            }
+
+            increments.erase(baseVals.size());
         }
-        increments[baseVals.size()] = 0;
+
         int baseVal = baseVals.top();
         baseVals.pop();
         return baseVal + bonus;
