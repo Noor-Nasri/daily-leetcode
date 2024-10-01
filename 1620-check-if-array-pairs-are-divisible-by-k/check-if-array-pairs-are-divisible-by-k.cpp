@@ -8,18 +8,15 @@ public:
                 val = k + (val % k); // -4 -> 2 at k=3, becomes it needs (+1) to make a pairing
             }
             int rem = val % k;
-            cout << val << " results in " << rem << " \n";
 
             if (requiredPairings[rem]){
                 // this value can be paired with a previous value
                 requiredPairings[rem]--;
-                cout << "paired\n";
 
             }else{
                 // this value must be paired with something else
                 int pairRequirement = (k - rem) % k; // 0 stays as 0, rest gets flipped 
                 requiredPairings[pairRequirement]++;
-                cout << "will need " << pairRequirement << "\n";
             }
         }
 
