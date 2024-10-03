@@ -1,24 +1,17 @@
 class Solution:
     def getCutoffStartInd(self, inds, cutoffEndInd):
         # gets largest ind smaller than cutoff, or -1
-        # for now O(n) but we'll change it to logn
-        low = 0
-        high = len(inds) - 1
-        best = -1
+        # my O(n) seems to be faster than O(logn) here lol
+        for i in range(len(inds) - 1, -1 , -1):
+            if inds[i] <= cutoffEndInd:
+                return inds[i]
 
-        while low <= high:
-            mid = (low + high)//2
-            if inds[mid] <= cutoffEndInd:
-                best = inds[mid]
-                low = mid + 1
-            else:
-                high = mid - 1
-
-        return best
+        return -1
 
 
 
     def minSubarray(self, nums: List[int], p: int) -> int:
+        if sum(nums) % p == 0: return 0
         # Setup prefix sums in O(n), then iterate backwards to pair them
         prefixSumIndices = {}
         tot = 0
@@ -30,8 +23,6 @@ class Solution:
             else:
                 prefixSumIndices[tot] = [ind]
         
-        #print(prefixSumIndices)
-
         # now go backwards
         best = -1
         tot = 0
