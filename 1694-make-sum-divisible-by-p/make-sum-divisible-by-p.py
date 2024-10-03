@@ -2,11 +2,19 @@ class Solution:
     def getCutoffStartInd(self, inds, cutoffEndInd):
         # gets largest ind smaller than cutoff, or -1
         # for now O(n) but we'll change it to logn
-        for i in range(len(inds) - 1, -1 , -1):
-            if inds[i] < cutoffEndInd:
-                return inds[i]
+        low = 0
+        high = len(inds) - 1
+        best = -1
 
-        return -1
+        while low <= high:
+            mid = (low + high)//2
+            if inds[mid] < cutoffEndInd:
+                best = inds[mid]
+                low = mid + 1
+            else:
+                high = mid - 1
+
+        return best
 
 
 
@@ -23,7 +31,7 @@ class Solution:
             else:
                 prefixSumIndices[tot] = [ind]
         
-        print(prefixSumIndices)
+        #print(prefixSumIndices)
 
         # now go backwards
         best = -1
