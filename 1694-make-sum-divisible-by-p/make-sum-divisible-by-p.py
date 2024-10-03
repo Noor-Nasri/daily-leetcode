@@ -1,18 +1,25 @@
 class Solution:
     def getCutoffStartInd(self, inds, cutoffEndInd):
         # gets largest ind smaller than cutoff, or -1
-        # my O(n) seems to be faster than O(logn) here lol
-        for i in range(len(inds) - 1, -1 , -1):
-            if inds[i] <= cutoffEndInd:
-                return inds[i]
+        low = 0
+        high = len(inds) - 1
+        best = -1
 
-        return -1
+        while low <= high:
+            mid = (low + high)//2
+            if inds[mid] <= cutoffEndInd:
+                best = inds[mid]
+                low = mid + 1
+            else:
+                high = mid - 1
+
+        return best
 
 
 
     def minSubarray(self, nums: List[int], p: int) -> int:
-        if sum(nums) % p == 0: return 0
         # Setup prefix sums in O(n), then iterate backwards to pair them
+        # When pairing the start and end indices, we do a O(logn) search. Thus nlogn
         prefixSumIndices = {}
         tot = 0
 
@@ -28,7 +35,6 @@ class Solution:
         tot = 0
         for ind_endOfCutoff in range(len(nums) - 1, - 1, -1):
             prev_sum_needed = (p - tot) % p
-            #print("At ind", ind_endOfCutoff, "our total is", tot, "so we need", prev_sum_needed)
 
             if prev_sum_needed in prefixSumIndices or (ind_endOfCutoff != len(nums) - 1 and prev_sum_needed == 0):
                 if prev_sum_needed in prefixSumIndices:
@@ -40,8 +46,7 @@ class Solution:
                     possible_len = ind_endOfCutoff - ind_startOfCutoff
                     if best == -1 or possible_len < best:
                         best = possible_len
-                        #print("improved best", best, "due to getting", prev_sum_needed, "from", ind_startOfCutoff, "and connecting with", ind_endOfCutoff)
-
+                        
             tot = (tot + nums[ind_endOfCutoff]) % p
 
         return best
