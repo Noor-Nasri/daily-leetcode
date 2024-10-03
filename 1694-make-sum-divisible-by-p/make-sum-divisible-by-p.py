@@ -8,7 +8,7 @@ class Solution:
 
         while low <= high:
             mid = (low + high)//2
-            if inds[mid] < cutoffEndInd:
+            if inds[mid] <= cutoffEndInd:
                 best = inds[mid]
                 low = mid + 1
             else:
@@ -20,7 +20,6 @@ class Solution:
 
     def minSubarray(self, nums: List[int], p: int) -> int:
         # Setup prefix sums in O(n), then iterate backwards to pair them
-        if sum(nums) % p == 0: return 0
         prefixSumIndices = {}
         tot = 0
 
