@@ -6,14 +6,12 @@
 #         self.right = right
 class Solution:
     def getChildren(self, root):
-        children = []
-        if root.left != None:
-            children.append(root.left)
-        if root.right != None:
-            children.append(root.right)
-        
-        return sorted(children, key = lambda x : x.val)
-        
+        if root.left == None and root.right == None: return []
+        elif root.left == None: return [root.right]
+        elif root.right == None: return [root.left]
+        elif root.right.val < root.left.val: return [root.right, root.left]
+        return [root.left, root.right]
+
     def checkChildren(self, root1, root2):
         # swaps children if needed, then make sure they match and keep going
         children1 = self.getChildren(root1)
