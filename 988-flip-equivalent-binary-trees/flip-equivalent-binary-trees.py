@@ -16,9 +16,7 @@ class Solution:
         # swaps children if needed, then make sure they match and keep going
         children1 = self.getChildren(root1)
         children2 = self.getChildren(root2)
-        if len(children1) != len(children2):
-            return False
-        
+        if len(children1) != len(children2): return False
         for i in range(len(children1)):
             if not self.checkEquiv(children1[i], children2[i]):
                 return False
