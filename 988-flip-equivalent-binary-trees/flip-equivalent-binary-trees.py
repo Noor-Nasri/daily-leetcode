@@ -22,17 +22,17 @@ class Solution:
             return False
         
         for i in range(len(children1)):
-            if not self.flipEquiv(children1[i], children2[i]):
+            if not self.checkEquiv(children1[i], children2[i]):
                 return False
         
         return True
-            
+
+    def checkEquiv(self, root1, root2):
+        if (root1.val != root2.val): return False
+        return self.checkChildren(root1, root2)
+
 
     def flipEquiv(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        if (root1 == None or root2 == None):
-            return root1==root2
+        if (root1 == None or root2 == None): return root1==root2
+        return self.checkEquiv(root1, root2)
         
-        if (root1.val != root2.val):
-            return False
-        
-        return self.checkChildren(root1, root2)
