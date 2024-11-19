@@ -28,7 +28,6 @@ class Solution:
             if self.seen[numToExclude] == 1:
                 self.duplicatedKeys.remove(numToExclude)
             elif self.seen[numToExclude] == 0:
-                print("Now deleting it")
                 del self.seen[numToExclude]
         
         return maxTotal
