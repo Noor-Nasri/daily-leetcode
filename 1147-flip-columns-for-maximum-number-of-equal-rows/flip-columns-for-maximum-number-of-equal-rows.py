@@ -12,8 +12,7 @@ class Solution:
             if row[0]: # Store keys with first element as 1
                 vals = tuple(row)
             else:
-                vals = tuple([1 - e for e in row])
-
+                vals = tuple([1 ^ e for e in row])
 
             if not vals in matches:
                 matches[vals] = 0
