@@ -3,8 +3,6 @@ class Solution:
         counts = [0 for i in range(26)]
         for c in s:
             counts[ord(c) - 97] += 1
-        
-        print(counts)
 
         longestPalindrome = 0
         addedCenter = 0
