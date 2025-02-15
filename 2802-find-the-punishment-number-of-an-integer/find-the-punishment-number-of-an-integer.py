@@ -1,4 +1,17 @@
 class Solution:
+    def __init__(self):
+        # We already got AC with ~600ms on this solution
+        # Since only 1k input, we can actually precompute this
+        self.answers = []
+        tot = 0
+        for i in range(1, 1001):
+            squared_digits =  [int(e) for e in str(i ** 2)]
+            if self.canMatch(squared_digits, 0, i):
+                tot += i**2
+        
+            self.answers.append(tot)
+        
+
     def canMatch(self, digits, indStart, reqSum):
         if indStart == len(digits):
             return reqSum == 0
@@ -16,11 +29,4 @@ class Solution:
         return False
 
     def punishmentNumber(self, n: int) -> int:
-        tot = 0
-
-        for i in range(1, n + 1):
-            squared_digits =  [int(e) for e in str(i ** 2)]
-            if self.canMatch(squared_digits, 0, i):
-                tot += i**2
-
-        return tot
+        return self.answers[n - 1]
