@@ -10,11 +10,14 @@ class Solution:
             (grid[0][0] + 1, 0, 0)
         ]
 
+        maxVal = 0
+
         while options:
             minDist, row, col = heappop(options)
             if distances[row][col] > 0: 
                 continue
             distances[row][col] = minDist
+            maxVal = max(maxVal, minDist)
 
             for dr, dc in directions:
                 nr, nc = row + dr, col + dc
@@ -28,7 +31,7 @@ class Solution:
                     nr, 
                     nc
                 ))
-        return distances
+        return distances, maxVal
 
 
     def maxPoints(self, grid: List[List[int]], queries: List[int]) -> List[int]:
@@ -37,8 +40,8 @@ class Solution:
         # Then need to rearrange this to [val] = total points possible
         # Single pass through queries after this
 
-        distances = self.solveDistsInGrid(grid)
-        pointDists = [0 for i in range(10**6 + 2)]
+        distances, maxVal = self.solveDistsInGrid(grid)
+        pointDists = [0 for i in range(maxVal + 1)]
         for row in distances:
             for val in row:
                 pointDists[val] += 1
@@ -50,6 +53,6 @@ class Solution:
         
         points =[]
         for query in queries:
-            points.append(pointDists[query])
+            points.append(pointDists[min(query, maxVal)])
         
         return points
