@@ -1,13 +1,12 @@
 class Solution:
     def minOperations(self, nums: List[int], k: int) -> int:
-        nums = set(nums)
-        minVal = min(nums)
-        if minVal < k:
-            return -1
-        
-        numOperations = len(nums)
-        if minVal == k:
-            numOperations -= 1
-        
-        return numOperations
+        seen = {k}
+        numOperations = 0
+        for num in nums:
+            if num < k:
+                return -1
+            
+            seen.add(num)
+
+        return len(seen) - 1
         
