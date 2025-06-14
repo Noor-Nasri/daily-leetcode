@@ -2,11 +2,9 @@ from heapq import heapify, heappush, heappop
 
 class Solution:
     def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
+        target_start_time = times[targetFriend][0]
         availableChairs = [i for i in range(len(times))]
         usedChairs = []
-        heapify(availableChairs)
-
-        target_start_time = times[targetFriend][0]
         times = sorted(times)
 
         for st, en in times:
@@ -19,6 +17,5 @@ class Solution:
                 return newChair
 
             heappush(usedChairs, (en, newChair))
-
 
         assert False
