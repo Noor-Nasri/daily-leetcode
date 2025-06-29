@@ -14,7 +14,7 @@ class Solution:
                 if s > e:
                     break
             else:
-                combos += (2 ** (e - s)) % (10**9 + 7)
+                combos += pow(2, (e - s), (10**9 + 7))
                 combos %= (10**9 + 7)
                 s += 1
 
