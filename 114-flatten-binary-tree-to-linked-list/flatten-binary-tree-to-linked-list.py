@@ -15,23 +15,17 @@ class Solution:
             rightHead, rightTail = self.flattenRecursively(root.right)
 
             leftTail.right = rightHead 
-            
+
             root.left = None
             root.right =  leftHead
-            return root, rightTail
-        
-        elif root.left != None:
-            leftHead, leftTail = self.flattenRecursively(root.left)
-            root.left = None
-            root.right =  leftHead
-            return root, leftTail
-        
-        elif root.right != None:
-            rightHead, rightTail = self.flattenRecursively(root.right)
             return root, rightTail
         
         else:
-            return root, root
+            head, tail = self.flattenRecursively(root.left or root.right)
+            root.left = None
+            root.right =  head
+            return root, tail or root
+        
 
 
         
