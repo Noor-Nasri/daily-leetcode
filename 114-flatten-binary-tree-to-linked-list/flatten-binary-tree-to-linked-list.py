@@ -6,25 +6,19 @@
 #         self.right = right
 class Solution:
     def flattenRecursively(self, root):
-        if root == None:
-            return None, None
-
-        # Returns head, tail
-        if root.left != None and root.right != None:
-            leftHead, leftTail = self.flattenRecursively(root.left)
-            rightHead, rightTail = self.flattenRecursively(root.right)
-
-            leftTail.right = rightHead 
-
-            root.left = None
-            root.right =  leftHead
-            return root, rightTail
+        # flatten and then return tail
+        if root == None or (not root.left and not root.right):
+            return root
         
-        else:
-            head, tail = self.flattenRecursively(root.left or root.right)
+        leftTail = self.flattenRecursively(root.left)
+        rightTail = self.flattenRecursively(root.right)
+
+        if leftTail:
+            leftTail.right = root.right 
+            root.right = root.left
             root.left = None
-            root.right =  head
-            return root, tail or root
+
+        return rightTail or leftTail
         
 
 
