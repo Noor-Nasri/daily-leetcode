@@ -1,23 +1,14 @@
 class Solution:
     def findCenter(self, edges: List[List[int]]) -> int:
-        counts = {}
-        numNodes = 0
+        seen = set()
         for u, v in edges:
-            if not u in counts:
-                counts[u] = 0
-                numNodes += 1
-
-            if not v in counts:
-                counts[v] = 0
-                numNodes += 1
+            if u in seen:
+                return u
+            if v in seen:
+                return v
             
-            counts[u] += 1
-            counts[v] += 1
-
-        
-        for node in counts:
-            if counts[node] == numNodes - 1:
-                return node
+            seen.add(u)
+            seen.add(v)
         
         return -1
         
