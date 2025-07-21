@@ -2,8 +2,8 @@ class Solution:
     def makeFancyString(self, s: str) -> str:
         final = []
         for c in s:
+            if len(final) >= 2 and final[-1] == final[-2] == c:
+                continue
             final.append(c)
-            if len(final) >= 3 and final[-1] == final[-2] == final[-3]:
-                final.pop()
-        return "".join(final)
         
+        return "".join(final)
