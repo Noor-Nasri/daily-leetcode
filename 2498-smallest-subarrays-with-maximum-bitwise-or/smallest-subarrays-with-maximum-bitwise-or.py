@@ -9,12 +9,11 @@ class Solution:
         return tot
     
     def adjustNumBits(self, curBitCounts, num, adjustmentVal):
-        # We could do it with some math but it should pass anyways
-        bits = str(bin(num))[2:][::-1]
-        for ind in range(len(bits)):
-            if bits[ind] == '1':
-                curBitCounts[ind] += adjustmentVal
-                
+        ind = 0
+        while num > 0:
+            curBitCounts[ind] += (num % 2) * adjustmentVal
+            num //= 2
+            ind += 1
 
 
     def smallestSubarrays(self, nums: List[int]) -> List[int]:
