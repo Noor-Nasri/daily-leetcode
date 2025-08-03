@@ -1,6 +1,5 @@
 class Solution:
     def exploreDir(self, posToFruit, initPos, k, majorDir):
-        print("Exoloring dir", majorDir)
         total = 0
         rangeStart = initPos
         rangeEnd = initPos + k * majorDir
