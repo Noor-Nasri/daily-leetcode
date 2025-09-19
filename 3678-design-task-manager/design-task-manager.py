@@ -1,4 +1,4 @@
-# Again this is just a priority queue with update question. Not implemented by default but we made it two days ago
+# Again this is just a priority queue with update question. Not implemented by default but we can modify heapq
 
 from heapq import heappop, heappush
 
