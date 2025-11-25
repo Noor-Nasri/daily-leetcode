@@ -9,6 +9,8 @@ class Solution:
     def smallestRepunitDivByK(self, k: int) -> int:
         if k == 1:
             return 1
+        elif k % 2 == 0 or k % 5 == 0:
+            return -1 # shortcut
 
         rem = 11 % k
         for i in range(10**6):
