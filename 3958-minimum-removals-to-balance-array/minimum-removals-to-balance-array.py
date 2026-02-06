@@ -3,12 +3,12 @@ class Solution:
     def minRemoval(self, nums: List[int], k: int) -> int:
         nums = sorted(nums)
         minRemovals = len(nums) - 1
+        largestIndSmEqCutoff = 0
 
         for ind1 in range(len(nums)):
-            low = ind1
+            low = max(ind1, largestIndSmEqCutoff)
             high = len(nums) - 1
             cutoff = nums[ind1] * k
-            largestIndSmEqCutoff = low
 
             while low <= high:
                 mid = (low + high)//2
@@ -20,5 +20,8 @@ class Solution:
             
             numRemovals = ind1 + len(nums) - 1 - largestIndSmEqCutoff 
             minRemovals = min(minRemovals, numRemovals)
+
+            if largestIndSmEqCutoff == cutoff:
+                break
 
         return minRemovals
