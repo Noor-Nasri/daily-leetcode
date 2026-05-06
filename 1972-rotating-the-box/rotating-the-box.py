@@ -1,27 +1,24 @@
 class Solution:
-    def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
-        shifted = [
-            [box[old_row][old_col] for old_row in range(len(box))][::-1] 
-            for old_col in range(len(box[0]))
-        ]
+    # We need to go through each row to create the corresponding flipped column
+    # The trick is to loop through the row backwards and maintain the ptr for the fall result
+    # We can think of this as shifting all the way right, then putting it on the flipped grid
+
+    def rotateTheBox(self, boxGrid: List[List[str]]) -> List[List[str]]:
+        nRowOrig, nColOrig = len(boxGrid), len(boxGrid[0])
+        newGrid = [["." for col in range(nRowOrig)] for row in range(nColOrig)]    
+
+        for origRow in range(nRowOrig):
+            newCol = nRowOrig - 1 - origRow
+            nextAvailPos = nColOrig - 1
+            for origCol in range(nColOrig - 1, -1, -1):
+                value = boxGrid[origRow][origCol]
+                if value == "*":
+                    newGrid[origCol][newCol] = "*"
+                    nextAvailPos = origCol - 1
+                elif value == "#":
+                    # Imagine # shifts all the way right to nextAvailPos
+                    # Then we flip (row, col) -> (col, nrow - row)
+                    newGrid[nextAvailPos][newCol] = "#"
+                    nextAvailPos -= 1
         
-        # Now for each column: push down all elements till obstacles, then continue moving
-        for col in range(len(shifted[0])):
-            curRow = 0
-            chainLen = 0
-
-            while curRow < len(shifted):
-                if shifted[curRow][col] == "#":
-                    chainLen += 1
-                    shifted[curRow][col] = "."
-                elif shifted[curRow][col] == "*":
-                    # paste the chain above us
-                    for above in range(chainLen):
-                        shifted[curRow - 1 - above][col] = "#"
-                    chainLen = 0
-                curRow += 1
-            
-            for above in range(chainLen):
-                shifted[len(shifted) - 1 - above][col] = "#"
-
-        return shifted
+        return newGrid
