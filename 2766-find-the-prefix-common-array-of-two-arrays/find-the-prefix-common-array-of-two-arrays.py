@@ -1,23 +1,22 @@
 class Solution:
     def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
-        seenA = set()
-        seenB = set()
-        total = 0
+        occurA = [False for i in range(51)]
+        occurB = [False for i in range(51)]
+        finalArray = []
+        commonCount = 0
 
-        result = []
         for ind in range(len(A)):
-            a = A[ind]
-            if a in seenB:
-                total += 1
-            else:
-                seenA.add(a)
-            
-            b = B[ind]
-            if b in seenA:
-                total += 1
-            else:
-                seenB.add(b)
-            
-            result.append(total)
+            a, b = A[ind], B[ind]
+
+            if not occurA[a] and occurB[a]:
+                commonCount += 1
+            occurA[a] = True
+
+            if not occurB[b] and occurA[b]:
+                commonCount += 1
+            occurB[b] = True
+
+            finalArray.append(commonCount)
         
-        return result
+        return finalArray
+        
