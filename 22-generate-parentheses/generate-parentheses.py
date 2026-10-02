@@ -13,15 +13,10 @@ class Solution:
             sols = self.generate(string + "(", rem_open - 1, req_closed + 1)
             solutions += sols
         
-        #print("Solutions at", rem_open, req_closed, solutions)
         return solutions
-        
-        
-
+    
     def generateParenthesis(self, n: int) -> List[str]:
         solutions = self.generate("(", n - 1, 1)
-        
-        # Because question wnats strict ordering, we sort
         return sorted(set(solutions))
                 
 
